@@ -26,7 +26,13 @@
 	<!-- Adjust some WP VIP rules which are very restrictive and not all that applicable as WPSEO is not on VIP -->
 	<rule ref="WordPress.VIP.RestrictedFunctions">
 		<properties>
-			<property name="exclude" value="user_meta,switch_to_blog,wp_remote_get,file_get_contents,curl,get_term_link,get_term_by,count_user_posts,get_pages" />
+			<property name="exclude" value="user_meta,switch_to_blog,wp_remote_get,file_get_contents,get_term_link,get_term_by,count_user_posts,get_pages" />
+		</properties>
+	</rule>
+
+	<rule ref="WordPress.WP.AlternativeFunctions">
+		<properties>
+			<property name="exclude" value="curl" />
 		</properties>
 	</rule>
 
@@ -51,8 +57,11 @@
 	<rule ref="WordPress.PHP.DiscouragedFunctions"/>
 	<rule ref="WordPress.WP.EnqueuedResources" />
 
-	<!-- Turned off because of known & reported bugs in the Sniffs, should be turned on once the bugs are fixed. -->
-	<!--<rule ref="WordPress.Variables.GlobalVariables"/>--><!-- WPCS #300 -->
+	<rule ref="WordPress.Variables.GlobalVariables">
+		<properties>
+			<property name="custom_test_class_whitelist" type="array" value="WPSEO_UnitTestCase,VideoSEO_UnitTestCase,WPSEO_WooCommerce_UnitTestCase,WPSEO_News_UnitTestCase,Yst_License_Manager_UnitTestCase,Clicky_UnitTestCase" />
+		</properties>
+	</rule>
 
 	<!-- ##### Sniffs for PHP cross-version compatibility ##### -->
     <!-- Requires CodeSniffer <2.0 at the moment, conflicts with other packages -->
@@ -101,6 +110,8 @@
 	<rule ref="WordPress-Docs">
 		<!-- Catches way too many things, like vars and file headers. -->
 		<exclude name="Generic.Commenting.DocComment.MissingShort" />
+		<!-- Closing comments do not make for tidy code. -->
+		<exclude name="Squiz.Commenting.LongConditionClosingComment" />
 	</rule>
 
 	<!-- exclude the 'empty' index files from some documentation checks -->
