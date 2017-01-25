@@ -22,8 +22,7 @@
 		"wp-coding-standards/wpcs": "~0.10.0",
 		"phpmd/phpmd": "^2.2.3",
 		"wimg/php-compatibility": "^7.0",
-		"simplyadmire/composer-plugins" : "@dev",
-		"prefer-stable" : true
+		"simplyadmire/composer-plugins" : "@dev"
 	},
 	"conflict": {
 		"squizlabs/php_codesniffer": "2.3.1"
